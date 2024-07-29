@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const serverConfig = require('../configs/serverConfig');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -38,7 +39,8 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Password is required'],
         validate: {
             validator: function (v) {
-                return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v);
+                // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
+                return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v);
             },
             message: props => `${props.value} is not a valid password`
         },
