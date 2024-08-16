@@ -1,0 +1,40 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="24px" color="#333333" font-family="Arial, sans-serif" align="center">
+          Welcome, {{name}}!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="16px" color="#666666" font-family="Arial, sans-serif" align="center">
+          Thank you for joining our community. We're excited to have you on board!
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="16px" color="#666666" font-family="Arial, sans-serif" align="center">
+          If you have any questions or need assistance, feel free to reach out to us.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#dddddd"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="14px" color="#999999" font-family="Arial, sans-serif" align="center">
+          Regards,
+        </mj-text>
+        <mj-text font-size="14px" color="#999999" font-family="Arial, sans-serif" align="center">
+          CampusMeet Team
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

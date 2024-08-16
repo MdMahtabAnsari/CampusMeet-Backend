@@ -1,6 +1,9 @@
 const UserRepository = require('../repositories/userRepository');
 const AppError = require('../utils/errors/appError');
 const InternalServerError = require('../utils/errors/internalServerError');
+const fs = require('fs');
+const userEmail = require('../utils/emails/userEmail');
+const queueConfig = require('../configs/queueConfig');
 
 class UserService {
     constructor() {
@@ -8,10 +11,30 @@ class UserService {
     }
 
     async createUser(user) {
+
         try {
-            return await this.userRepository.createUser(user);
+            const image = user.image;
+            delete user.image;
+            const newUser = await this.userRepository.createUser(user);
+            userEmail.welcomeEmail({ to: newUser.email, name: newUser.name });
+            if (image) {
+                queueConfig.imageQueue.add({ image: image, id: newUser._id });
+            }
+            return {
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                phone: newUser.phone,
+                image: newUser.image
+            }
+
         }
         catch (error) {
+
+            if (fs.existsSync(user.image)) {
+                fs.unlinkSync(user.image);
+            }
+
             if (error instanceof AppError) {
                 throw error;
             }
@@ -21,6 +44,7 @@ class UserService {
             }
         }
     }
+
 
     async getUserByEmail(email) {
         try {

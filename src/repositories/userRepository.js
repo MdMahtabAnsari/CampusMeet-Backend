@@ -42,6 +42,37 @@ class UserRepository {
             throw new InternalServerError();
         }
     }
+    async getAllUsers() {
+        try {
+            return await User.find();
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
+    }
+
+    async updatePassword(email, password) {
+        try {
+            return await User.findOneAndUpdate({ email: email }, { password: password }, { new: true });
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
+    }
+
+    async updateImageById(id, image) {
+        try {
+            return await User.findByIdAndUpdate(id, { image: image }, { new: true });
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
+
+    }
+
 }
 
 module.exports = UserRepository;
