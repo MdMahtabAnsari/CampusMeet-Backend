@@ -43,8 +43,18 @@ class MeetingRepository {
     async getMeetingByParticipantIdWithStatus(participantId, status) {
         try {
             const meetings = await Meeting.find({ participants: { $in: [participantId] }, status: status });
-            const broadcastMeetings = await Meeting.find({ type: 'Broadcast', status: status });
-            return [...meetings, ...broadcastMeetings];
+            return meetings;
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
+    }
+
+    async getMeetingByParticipantIdWithStatusWithPopulate(participantId, status) {
+        try {
+            const meetings = await Meeting.find({ participants: { $in: [participantId] }, status: status }).populate('participants' , 'name email phone image').populate('createdBy', 'name email phone image');
+            return meetings;
         }
         catch (error) {
             console.log(error);
@@ -56,6 +66,7 @@ class MeetingRepository {
 
     async getMeetingById(id) {
         try {
+           
             return await Meeting.findById(id);
         }
         catch (error) {
@@ -75,7 +86,17 @@ class MeetingRepository {
             throw new InternalServerError();
         }
     }
-
+    async getMeetingByStatusAndUserIdWithPopulate(status, userId) {
+        try {
+            return await Meeting.find({ createdBy: userId, status: status }).populate('participants', 'name email phone image').populate('createdBy', 'name email phone image');
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
+    }
+    
+    
     async updateMeeting(meeting, id) {
         try {
             return await Meeting.findByIdAndUpdate(id, meeting, { new: true });
@@ -91,6 +112,15 @@ class MeetingRepository {
             }
         }
 
+    }
+    async getMeetingByIdAndStatus(id, status) {
+        try {
+            return await Meeting.findOne({ _id: id, status: status });
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
     }
 }
 

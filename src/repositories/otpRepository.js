@@ -34,13 +34,16 @@ class OtpRepository {
     }
 
     async deleteOtpByEmail(email) {
-        try {
-            return await Otp.deleteOne({ email });
-        } catch (error) {
+        try{
+            return await Otp.findOneAndDelete({ email: email });
+
+        }
+        catch(error){
             console.error('Error deleting otp:', error);
             throw new InternalServerError();
         }
     }
+    
 }
 
 

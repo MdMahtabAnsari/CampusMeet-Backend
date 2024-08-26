@@ -65,7 +65,7 @@ const signOut = async (req, res) => {
 
 const updatePassword = async (req, res) => {
     try {
-        const email = req.user.email;
+        const email = req?.user?.email;
         const password = req.body.password
         const response = await authService.updatePassword(email, password);
         res.clearCookie('otpToken').status(200).json({

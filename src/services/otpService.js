@@ -30,7 +30,6 @@ class OtpService {
                 }),
 
             };
-
             const generatedOtp = await this.otpRepository.createOtp(otp);
             otpEmail({ to: email, otp: otp.otp });
             return {
@@ -52,12 +51,16 @@ class OtpService {
                 throw new BadRequestError('OTP_NOT_FOUND');
             }
             const isMatch = await bcrypt.compare(otp, otpData.otp);
+            console.log(isMatch);
+
             if (!isMatch) {
                 throw new BadRequestError('OTP_MISMATCH');
             }
+            await this.otpRepository.deleteOtpByEmail(email);
             const token = jwt.sign({ email: otpData.email }, serverConfig.JWT_SECRET, { expiresIn: `${serverConfig.OTP_EXPIRES_IN}m` });
             return {
-                token: token
+                token: token,
+                email: otpData.email
             };
         } catch (error) {
             if (error instanceof AppError) {
@@ -67,6 +70,8 @@ class OtpService {
             }
         }
     }
+
+
 
 
 }

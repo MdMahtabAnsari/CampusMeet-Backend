@@ -6,7 +6,7 @@ const authRouter = express.Router();
 
 authRouter.post('/signin', authController.signIn);
 authRouter.delete('/signout', authController.signOut);
-authRouter.post('/password', otpValidator.tokenValidator, authController.updatePassword);
+authRouter.post('/resetPassword', otpValidator.tokenValidator, authController.updatePassword);
 
 
 

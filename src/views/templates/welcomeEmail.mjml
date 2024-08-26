@@ -1,40 +1,39 @@
 <mjml>
-  <mj-body>
-    <mj-section>
+  <mj-body background-color="#f4f4f4" font-family="Arial, sans-serif">
+    
+    <!-- Welcome Section -->
+    <mj-section background-color="#ffffff" border-radius="8px" padding="20px">
       <mj-column>
-        <mj-text font-size="24px" color="#333333" font-family="Arial, sans-serif" align="center">
+        <mj-text font-size="24px" color="#333333" font-weight="bold" align="center" padding-bottom="10px">
           Welcome, {{name}}!
         </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-text font-size="16px" color="#666666" font-family="Arial, sans-serif" align="center">
+        <mj-text font-size="16px" color="#666666" align="center" padding-bottom="10px">
           Thank you for joining our community. We're excited to have you on board!
         </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-text font-size="16px" color="#666666" font-family="Arial, sans-serif" align="center">
+        <mj-text font-size="16px" color="#666666" align="center">
           If you have any questions or need assistance, feel free to reach out to us.
         </mj-text>
       </mj-column>
     </mj-section>
-    <mj-section>
+    
+    <!-- Divider Section -->
+    <mj-section padding="0px">
       <mj-column>
-        <mj-divider border-color="#dddddd"></mj-divider>
+        <mj-divider border-color="#dddddd" border-width="1px"></mj-divider>
       </mj-column>
     </mj-section>
-    <mj-section>
+    
+    <!-- Footer Section -->
+    <mj-section padding="20px 0">
       <mj-column>
-        <mj-text font-size="14px" color="#999999" font-family="Arial, sans-serif" align="center">
+        <mj-text font-size="14px" color="#999999" align="center" padding-bottom="10px">
           Regards,
         </mj-text>
-        <mj-text font-size="14px" color="#999999" font-family="Arial, sans-serif" align="center">
-          CampusMeet Team
+        <mj-text font-size="14px" color="#999999" align="center">
+          CampsMeet Team
         </mj-text>
       </mj-column>
     </mj-section>
+    
   </mj-body>
 </mjml>

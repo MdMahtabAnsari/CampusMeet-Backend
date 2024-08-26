@@ -6,14 +6,18 @@ const userRouter = require('./routers/userRouter');
 const authRouter = require('./routers/authRouter');
 const meetingRouter = require('./routers/meetingRouter');
 const otpRouter = require('./routers/otpRouter');
+const friendRequestRouter = require('./routers/friendRequestRouter');
+const friendRouter = require('./routers/friendRouter');
 const activeAllProcess = require('./jobs/activeAllProcess');
 const AppError = require('./utils/errors/appError');
 const multer = require('multer');
+const cors = require('cors');
+const corsConfig = require('./configs/corsConfig');
 
 
 const app = express();
 
-
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -23,6 +27,8 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/meetings', meetingRouter);
 app.use('/otp', otpRouter);
+app.use('/friendRequests', friendRequestRouter);
+app.use('/friends', friendRouter);
 
 // check if the server is running
 app.get('/', (req, res) => {
@@ -63,6 +69,7 @@ app.use((error, req, res, next) => {
 
 app.listen(serverConfig.PORT, async () => {
     try {
+        console.log(corsConfig);
         await dbConfig.connectToDB();
         console.log(`Server is running on http://localhost:${serverConfig.PORT}`);
         activeAllProcess();

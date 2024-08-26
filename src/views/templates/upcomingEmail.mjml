@@ -2,16 +2,16 @@
   <mj-body background-color="#f4f4f4" font-family="Arial, sans-serif">
     
     <!-- Main Content Section -->
-    <mj-section background-color="#ffffff" border-radius="8px" padding="20px">
+    <mj-section background-color="#ffffff" border-radius="8px" padding="30px 20px">
       <mj-column>
         <mj-text font-size="20px" color="#333333" font-weight="bold" padding-bottom="10px">
           Dear {{name}},
         </mj-text>
         <mj-text font-size="16px" color="#333333" padding-bottom="10px">
-          We regret to inform you that the meeting titled "{{title}}" scheduled for {{date}} from {{startTime}} to {{endTime}} has been cancelled.
+          We are pleased to inform you that a new meeting titled "{{title}}" has been scheduled for {{date}} from {{startTime}} to {{endTime}}.
         </mj-text>
         <mj-text font-size="16px" color="#333333" padding-bottom="10px">
-          We apologize for any inconvenience caused. If you have any questions or need further assistance, please feel free to contact us.
+          Please mark your calendar and let us know if you have any questions or need further details.
         </mj-text>
         <mj-text font-size="16px" color="#333333" padding-top="20px">
           Best regards,

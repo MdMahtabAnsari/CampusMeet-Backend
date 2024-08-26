@@ -2,18 +2,24 @@
   <mj-body background-color="#f4f4f4" font-family="Arial, sans-serif">
     
     <!-- Main Content Section -->
-    <mj-section background-color="#ffffff" border-radius="8px" padding="20px">
+    <mj-section background-color="#ffffff" border-radius="8px" padding="30px 20px">
       <mj-column>
         <mj-text font-size="20px" color="#333333" font-weight="bold" padding-bottom="10px">
           Dear {{name}},
         </mj-text>
         <mj-text font-size="16px" color="#333333" padding-bottom="10px">
-          We regret to inform you that the meeting titled "{{title}}" scheduled for {{date}} from {{startTime}} to {{endTime}} has been cancelled.
+          This is a friendly reminder that the meeting titled "{{title}}" has started. It is scheduled for today, {{date}}, and will continue until {{endTime}}.
         </mj-text>
         <mj-text font-size="16px" color="#333333" padding-bottom="10px">
-          We apologize for any inconvenience caused. If you have any questions or need further assistance, please feel free to contact us.
+          If you haven't joined yet, please click the link below to join the meeting now.
         </mj-text>
+        <mj-button background-color="#007BFF" color="#ffffff" href="{{meetingLink}}" font-size="16px" padding="15px" border-radius="5px">
+          Join Meeting
+        </mj-button>
         <mj-text font-size="16px" color="#333333" padding-top="20px">
+          If you have any issues or need assistance, feel free to reach out to us.
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
           Best regards,
         </mj-text>
         <mj-text font-size="16px" color="#333333">

@@ -39,8 +39,30 @@ const welcomeEmail = async (userData) => {
     }
 }
 
+const updateEmail = async (userData) => {
+    try {
+        const updateTemplate = await emailTemplateService.generateEmailTemplate('updateEmail', {
+            name: userData.name,
+            email: userData.to,
+            phone: userData.phone
+        });
+        const emailData = {
+            to: userData.to,
+            subject: 'Profile Updated',
+            html: updateTemplate
+        }
+        queueConfig.userQueue.add(emailData);
+    }
+    catch (error) {
+        console.error('Error processing update email:', error);
+        throw error;
+    }
+}
+
+
 
 module.exports = {
     changedPasswordEmail,
-    welcomeEmail
+    welcomeEmail,
+    updateEmail
 };

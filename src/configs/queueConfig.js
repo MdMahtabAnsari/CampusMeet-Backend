@@ -1,41 +1,31 @@
 const Queue = require('bull');
-const serverConfig = require('./serverConfig');
+const redisConfig = require('./redisConfig');
 
 const statusQueue = new Queue('status', {
-    redis: {
-        host: serverConfig.REDIS_HOST,
-        port: serverConfig.REDIS_PORT,
-        password: serverConfig.REDIS_PASSWORD
-    }
+    redis: redisConfig
 });
 
 const otpQueue = new Queue('otp', {
-    redis: {
-        host: serverConfig.REDIS_HOST,
-        port: serverConfig.REDIS_PORT,
-        password: serverConfig.REDIS_PASSWORD
-    }
+    redis: redisConfig
 });
 
 const userQueue = new Queue('user', {
-    redis: {
-        host: serverConfig.REDIS_HOST,
-        port: serverConfig.REDIS_PORT,
-        password: serverConfig.REDIS_PASSWORD
-    }
+    redis: redisConfig
 });
 
 const imageQueue = new Queue('image', {
-    redis: {
-        host: serverConfig.REDIS_HOST,
-        port: serverConfig.REDIS_PORT,
-        password: serverConfig.REDIS_PASSWORD
-    }
+    redis: redisConfig
 });
+
+const friendQueue = new Queue('friend', {
+    redis: redisConfig
+});
+
 
 module.exports = {
     statusQueue,
     otpQueue,
     userQueue,
-    imageQueue
+    imageQueue,
+    friendQueue
 };

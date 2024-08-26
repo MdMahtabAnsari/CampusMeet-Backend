@@ -28,6 +28,11 @@ const serverConfig = {
     OTP_EXPIRES_IN: process.env.OTP_EXPIRES_IN,
     OTP_LENGTH: process.env.OTP_LENGTH,
     OTP_TYPE: process.env.OTP_TYPE,
+    CORS_ORIGIN: process.env.CORS_ORIGIN,
+    CORS_METHODS: process.env.CORS_METHODS,
+    CORS_HEADERS: process.env.CORS_HEADERS,
+    CORS_CREDENTIALS: process.env.CORS_CREDENTIALS,
+
 };
 
 module.exports = serverConfig;

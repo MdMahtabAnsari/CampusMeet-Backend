@@ -11,7 +11,7 @@ const meetingSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['1V1', 'Group', 'Broadcast'],
+        enum: ['1V1', 'Group'],
         required: [true, 'Type is required']
     },
     date: {
@@ -42,6 +42,7 @@ const meetingSchema = new mongoose.Schema({
     ],
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: [true, 'Created by is required']
     },
     link: {

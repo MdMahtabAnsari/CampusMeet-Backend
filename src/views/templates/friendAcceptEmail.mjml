@@ -1,0 +1,38 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text align="center" font-size="20px" color="#333333">
+          Your Friend Request Has Been Accepted!
+        </mj-text>
+        <mj-divider border-width="1px" border-style="solid" border-color="#cccccc" />
+        <mj-text font-size="16px" color="#333333">
+          Hi {{name}},
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          Good news! {{friendName}} has accepted your friend request.
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          Here are your friend's details:
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          <strong>Name:</strong> {{friendName}} <br />
+          <strong>Email:</strong> {{friendEmail}} <br />
+          <strong>Phone:</strong> {{friendPhone}}<br />
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          You can now connect
+        </mj-text>
+        <mj-button href="[Chat URL]" background-color="#007bff" color="#ffffff">
+          Login
+        </mj-button>
+        <mj-text font-size="12px" color="#999999" align="center">
+          If you did not send this request, please contact our support team.
+        </mj-text>
+        <mj-text font-size="12px" color="#999999" align="center">
+          &copy; {{year}} CampsMeet. All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

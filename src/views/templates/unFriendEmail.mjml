@@ -1,0 +1,38 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text align="center" font-size="20px" color="#333333">
+          You've Been Unfriended
+        </mj-text>
+        <mj-divider border-width="1px" border-style="solid" border-color="#cccccc" />
+        <mj-text font-size="16px" color="#333333">
+          Hi {{name}},
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          We wanted to inform you that {{friendName}} has removed you from their friends list.
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          Here are the details of your previous friend:
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          <strong>Name:</strong> {{friendName}} <br />
+          <strong>Email:</strong> {{friendName}} <br />
+          <strong>Phone:</strong> {{friendPhone}} <br />
+        </mj-text>
+        <mj-text font-size="16px" color="#333333">
+          We understand that this may be disappointing, but we encourage you to continue building meaningful connections on CampsMeet.
+        </mj-text>
+        <mj-button href="[Explore URL]" background-color="#007bff" color="#ffffff">
+          Find New Friends
+        </mj-button>
+        <mj-text font-size="12px" color="#999999" align="center">
+          If you have any questions or concerns, please reach out to our support team.
+        </mj-text>
+        <mj-text font-size="12px" color="#999999" align="center">
+          &copy; {{year}} CampsMeet. All rights reserved.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -1,25 +1,21 @@
-const UserService = require('../services/userService');
+const FriendRequestService = require('../services/friendRequestService');
 const AppError = require('../utils/errors/appError');
-const userService = new UserService();
+const friendRequestService = new FriendRequestService();
 
-const createUser = async (req, res) => {
+const sendFriendRequest = async (req, res) => {
+
     try {
-        const user = req.body;
-        const file = req.file;
-        console.log(file);
-        const response = await userService.createUser({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            password: user.password,
-            image: file?.path
-        });
-        res.status(201).json({
-            message: "Successfully registered the user",
+        const senderId = req.user.id;
+        const receiverId = req.params.receiverId;
+        console.log("receiverId",receiverId);
+        const response = await friendRequestService.sendFriendRequest(senderId, receiverId);
+        res.status(200).json({
+            message: "Friend request sent successfully",
             success: true,
             data: response,
             error: {},
         });
+
     }
     catch (error) {
         if (error instanceof AppError) {
@@ -40,18 +36,20 @@ const createUser = async (req, res) => {
             });
         }
     }
-};
+}
 
-const getUserByEmail = async (req, res) => {
+const acceptFriendRequest = async (req, res) => {
     try {
-        const email = req.params.email;
-        const response = await userService.getUserByEmail(email);
+        const receiverId = req.user.id;
+        const senderId = req.params.senderId;
+        const response = await friendRequestService.acceptFriendRequest(senderId, receiverId);
         res.status(200).json({
-            message: "Successfully retrieved the user",
+            message: "Friend request accepted successfully",
             success: true,
             data: response,
             error: {},
         });
+
     }
     catch (error) {
         if (error instanceof AppError) {
@@ -72,22 +70,48 @@ const getUserByEmail = async (req, res) => {
             });
         }
     }
-};
+}
 
-const updateUser = async (req, res) => {
+const rejectFriendRequest = async (req, res) => {
     try {
-        const user = req.body;
-        const id = req?.user?.id;
-        const file = req.file;
-        console.log(file);
-        const response = await userService.updateUserbyId(id, {
-            name: user.name,
-            phone: user.phone,
-            email: user.email,
-            image: file?.path
-        });
+        const receiverId = req.user.id;
+        const senderId = req.params.senderId;
+        const response = await friendRequestService.rejectFriendRequest(senderId, receiverId);
         res.status(200).json({
-            message: "Successfully updated the user",
+            message: "Friend request rejected successfully",
+            success: true,
+            data: response,
+            error: {},
+        });
+
+    }
+    catch (error) {
+        if (error instanceof AppError) {
+            res.status(error.statusCode).json({
+                message: error.message,
+                success: false,
+                data: {},
+                error: error.status
+            });
+        }
+        else {
+            console.log(error);
+            res.status(500).json({
+                message: "Internal Server Error",
+                success: false,
+                data: {},
+                error: "error"
+            });
+        }
+    }
+}
+
+async function getAllFriendRequestByReceiver(req, res) {
+    try {
+        const receiverId = req?.user?.id;
+        const response = await friendRequestService.getAllFriendRequestByReceiver(receiverId);
+        res.status(200).json({
+            message: "Friend requests fetched successfully",
             success: true,
             data: response,
             error: {},
@@ -114,12 +138,12 @@ const updateUser = async (req, res) => {
     }
 }
 
-const getUser = async(req,res) => {
+async function getAllFriendRequestBySender(req, res) {
     try {
-        const id = req?.user?.id;
-        const response = await userService.getUserById(id);
+        const senderId = req?.user?.id;
+        const response = await friendRequestService.getAllFriendReqestBySender(senderId);
         res.status(200).json({
-            message: "Successfully retrieved the user",
+            message: "Friend requests fetched successfully",
             success: true,
             data: response,
             error: {},
@@ -145,12 +169,14 @@ const getUser = async(req,res) => {
         }
     }
 }
-const getFilteredUsers = async(req,res) => {
+
+async function cancelFriendRequest(req, res) {
     try {
-        const id = req?.user?.id;
-        const response = await userService.getFilteredUsers(id);
+        const senderId = req?.user?.id;
+        const receiverId = req.params.receiverId;
+        const response = await friendRequestService.cancelFriendRequest(senderId, receiverId);
         res.status(200).json({
-            message: "Successfully retrieved the users",
+            message: "Friend request cancelled successfully",
             success: true,
             data: response,
             error: {},
@@ -176,11 +202,16 @@ const getFilteredUsers = async(req,res) => {
         }
     }
 }
+
+
+
 
 module.exports = {
-    createUser,
-    getUserByEmail,
-    updateUser,
-    getUser,
-    getFilteredUsers
+    sendFriendRequest,
+    acceptFriendRequest,
+    rejectFriendRequest,
+    getAllFriendRequestByReceiver,
+    getAllFriendRequestBySender,
+    cancelFriendRequest
 };
+
