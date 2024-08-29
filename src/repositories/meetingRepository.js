@@ -122,6 +122,15 @@ class MeetingRepository {
             throw new InternalServerError();
         }
     }
+    async getMeetingByIdAndCreatorIdWithPopulate(id, creatorId) {
+        try {
+            return await Meeting.findOne({ _id: id, createdBy: creatorId }).populate('participants', 'name email phone image');
+        }
+        catch (error) {
+            console.log(error);
+            throw new InternalServerError();
+        }
+    }
 }
 
 module.exports = MeetingRepository;

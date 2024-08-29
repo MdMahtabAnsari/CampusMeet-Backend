@@ -327,6 +327,39 @@ const getMeetingByStatusAndUserIdAndMeetingId = async (req, res) => {
         }
     }
 }
+const getMeetingByIdAndUserId = async (req, res) => {
+    try {
+        const userId = req.user?.id;
+        const meetingId = req.params?.meetingId;
+        const response = await meetingService.getMeetingByIdAndCreatorId(meetingId, userId);
+        res.status(200).json({
+            message: "Successfully retrieved the meeting",
+            success: true,
+            data: response,
+            error: {},
+        });
+    }
+    catch (error) {
+        if (error instanceof AppError) {
+            res.status(error.statusCode).json({
+                message: error.message,
+                success: false,
+                data: {},
+                error: error.status
+            });
+        }
+        else {
+            console.log(error);
+            res.status(500).json({
+                message: "Internal Server Error",
+                success: false,
+                data: {},
+                error: "error"
+            });
+        }
+    }
+}
+
 module.exports = {
     createMeeting,
     updateMeetingStatus,
@@ -336,6 +369,7 @@ module.exports = {
     updateMeeting,
     creatorJoinMeeting,
     getMeetingByParticipantIdWithStatusAndMeetingId,
-    getMeetingByStatusAndUserIdAndMeetingId
+    getMeetingByStatusAndUserIdAndMeetingId,
+    getMeetingByIdAndUserId
 
 };

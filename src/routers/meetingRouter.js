@@ -15,6 +15,7 @@ meetingRouter.get('/creator/:status', authValidator.isLoggedIn, meetingControlle
 // get meeting by status and meeting id
 meetingRouter.get('/participant/:status/:meetingId', authValidator.isLoggedIn, meetingController.getMeetingByParticipantIdWithStatusAndMeetingId);
 meetingRouter.get('/creator/:status/:meetingId', authValidator.isLoggedIn, meetingController.getMeetingByStatusAndUserIdAndMeetingId);
+meetingRouter.get('/:meetingId', authValidator.isLoggedIn, meetingController.getMeetingByIdAndUserId);
 
 // update
 meetingRouter.put('/update/:meetingId', authValidator.isLoggedIn, meetingController.updateMeeting);

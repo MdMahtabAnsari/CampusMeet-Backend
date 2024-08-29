@@ -327,6 +327,24 @@ class MeetingService {
             }
         }
     }
+    async getMeetingByIdAndCreatorId(meetingId, creatorId){
+        try{
+            const meeting = await this.meetingRepository.getMeetingByIdAndCreatorIdWithPopulate(meetingId, creatorId);
+            if(!meeting){
+                throw new NotFoundError('Meeting');
+            }
+            return meeting;
+        }
+        catch(error){
+            if(error instanceof AppError){
+                throw error;
+            }
+            else{
+                throw new InternalServerError();
+            }
+        }
+    }
+
 }
 
 module.exports = MeetingService;
