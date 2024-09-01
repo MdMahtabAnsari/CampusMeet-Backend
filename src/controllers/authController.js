@@ -11,7 +11,8 @@ const signIn = async (req, res) => {
         res.cookie('authToken', response.token, {
             httpOnly: serverConfig.HTTP_ONLY_COOKIE === 'true',
             secure: serverConfig.COOKIE_SECURE === 'true',
-            expires: new Date(Date.now() + parseInt(serverConfig.COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000) //days to milliseconds,
+            expires: new Date(Date.now() + parseInt(serverConfig.COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000), //days to milliseconds,
+            sameSite: serverConfig.SAME_SITE_COOKIE
 
         }).status(200).json({
             message: "Successfully logged in",

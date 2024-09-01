@@ -79,7 +79,6 @@ const updateUser = async (req, res) => {
         const user = req.body;
         const id = req?.user?.id;
         const file = req.file;
-        console.log(file);
         const response = await userService.updateUserbyId(id, {
             name: user.name,
             phone: user.phone,
@@ -117,7 +116,9 @@ const updateUser = async (req, res) => {
 const getUser = async(req,res) => {
     try {
         const id = req?.user?.id;
+        console.log("getUser",id);
         const response = await userService.getUserById(id);
+        console.log("getUser",response);
         res.status(200).json({
             message: "Successfully retrieved the user",
             success: true,

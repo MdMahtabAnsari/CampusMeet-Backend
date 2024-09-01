@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const isLoggedIn = (req, res, next) => {
     const token = req.cookies?.authToken;
-    console.log(token);
     if (!token) {
         return res.status(401).json({
             message: "Unauthorized access",

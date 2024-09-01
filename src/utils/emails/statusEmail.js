@@ -23,7 +23,9 @@ const cancelEmail = async (meeting) => {
                     html: cancelTemplate
                 }
 
-                queueConfig.statusQueue.add(emailData);
+                queueConfig.statusQueue.add(emailData,{
+                    removeOnComplete: true,
+                });
 
             }
 
@@ -54,7 +56,9 @@ const upComingEmail = async (meeting) => {
                     html: upComingTemplate
                 }
 
-                queueConfig.statusQueue.add(emailData);
+                queueConfig.statusQueue.add(emailData,{
+                    removeOnComplete: true,
+                });
             }
         }
     }

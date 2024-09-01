@@ -13,7 +13,9 @@ const changedPasswordEmail = async (changedPasswordData) => {
             subject: 'Password Changed Successfully',
             html: changedPasswordTemplate
         }
-        queueConfig.userQueue.add(emailData);
+        queueConfig.userQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing changed password:', error);
@@ -31,7 +33,9 @@ const welcomeEmail = async (userData) => {
             subject: 'Welcome to our platform',
             html: welcomeTemplate
         }
-        queueConfig.userQueue.add(emailData);
+        queueConfig.userQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing welcome email:', error);
@@ -51,7 +55,9 @@ const updateEmail = async (userData) => {
             subject: 'Profile Updated',
             html: updateTemplate
         }
-        queueConfig.userQueue.add(emailData);
+        queueConfig.userQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing update email:', error);

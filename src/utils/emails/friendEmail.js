@@ -19,7 +19,9 @@ const friendRequestEmail = async (friendRequestData) => {
             subject: 'Friend Request',
             html: friendRequestTemplate
         }
-        queueConfig.friendQueue.add(emailData);
+        queueConfig.friendQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing friend request:', error);
@@ -42,7 +44,9 @@ const friendAcceptEmail = async (friendRequestData) => {
             subject: 'Friend Request Accepted',
             html: friendAcceptTemplate
         }
-        queueConfig.friendQueue.add(emailData);
+        queueConfig.friendQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing friend request:', error);
@@ -65,7 +69,9 @@ const friendRejectEmail = async (friendRequestData) => {
             subject: 'Friend Request Rejected',
             html: friendRejectTemplate
         }
-        queueConfig.friendQueue.add(emailData);
+        queueConfig.friendQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing friend request:', error);
@@ -88,7 +94,9 @@ const unFriendEmail = async (friendRequestData) => {
             subject: 'Friend Removed',
             html: unFriendTemplate
         }
-        queueConfig.friendQueue.add(emailData);
+        queueConfig.friendQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing friend request:', error);

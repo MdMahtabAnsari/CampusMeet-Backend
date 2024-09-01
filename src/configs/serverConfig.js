@@ -32,6 +32,7 @@ const serverConfig = {
     CORS_METHODS: process.env.CORS_METHODS,
     CORS_HEADERS: process.env.CORS_HEADERS,
     CORS_CREDENTIALS: process.env.CORS_CREDENTIALS,
+    SAME_SITE_COOKIE: process.env.SAME_SITE_COOKIE,
 
 };
 

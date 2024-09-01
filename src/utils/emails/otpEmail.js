@@ -14,7 +14,9 @@ const otpEmail = async (otpData) => {
             subject: 'OTP for Verification',
             html: otpTemplate
         }
-        queueConfig.otpQueue.add(emailData);
+        queueConfig.otpQueue.add(emailData,{
+            removeOnComplete: true,
+        });
     }
     catch (error) {
         console.error('Error processing OTP:', error);
