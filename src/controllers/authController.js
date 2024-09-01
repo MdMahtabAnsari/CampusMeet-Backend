@@ -12,7 +12,7 @@ const signIn = async (req, res) => {
             httpOnly: serverConfig.HTTP_ONLY_COOKIE === 'true',
             secure: serverConfig.COOKIE_SECURE === 'true',
             expires: new Date(Date.now() + parseInt(serverConfig.COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000), //days to milliseconds,
-            sameSite: serverConfig.SAME_SITE_COOKIE
+            sameSite: serverConfig.SAME_SITE_COOKIE==='None'? 'None': 'Lax'
 
         }).status(200).json({
             message: "Successfully logged in",
