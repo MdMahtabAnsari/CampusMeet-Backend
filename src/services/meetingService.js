@@ -8,7 +8,7 @@ const AppError = require('../utils/errors/appError');
 const InternalServerError = require('../utils/errors/internalServerError');
 const UnAuthorizedError = require('../utils/errors/unAuthorizedError');
 const NotFoundError = require('../utils/errors/notFoundError');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const statusEmail = require('../utils/emails/statusEmail');
 
 
@@ -22,24 +22,24 @@ class MeetingService {
 
     async validateMeeting(meeting) {
         try {
-            const date = moment(meeting.date, 'DD/MM/YYYY');
+            const timeZone = "Asia/Kolkata";
+            const date = moment.tz(meeting.date, 'DD/MM/YYYY', timeZone);
             if (!date.isValid()) {
                 throw new BadRequestError('Invalid date format. Date should be in DD/MM/YYYY format only');
             }
-            const startTime = moment(meeting.startTime, 'hh:mm A');
+            const startTime = moment.tz(`${meeting.date} ${meeting.startTime}`, 'DD/MM/YYYY hh:mm A', timeZone);
             if (!startTime.isValid()) {
                 throw new BadRequestError('Invalid start time format. Start time should be in HH:MM AM/PM format only');
             }
-            const endTime = moment(meeting.endTime, 'hh:mm A');
+            const endTime = moment.tz(`${meeting.date} ${meeting.endTime}`, 'DD/MM/YYYY hh:mm A', timeZone);
             if (!endTime.isValid()) {
                 throw new BadRequestError('Invalid end time format. End time should be in HH:MM AM/PM format only');
             }
-            const startTimeCheck = moment(`${meeting.date} ${meeting.startTime}`, 'DD/MM/YYYY hh:mm A');
-            if (startTimeCheck.isBefore(moment())) {
+            if (startTime.isBefore(moment.tz(timeZone))) {
                 throw new BadRequestError('Meeting date and time should be in future');
             }
-            const endTimeCheck = moment(`${meeting.date} ${meeting.endTime}`, 'DD/MM/YYYY hh:mm A');
-            if (endTimeCheck.isBefore(startTimeCheck)) {
+    
+            if (endTime.isBefore(startTime)) {
                 throw new BadRequestError('End time should be after start time');
             }
             if (!Array.isArray(meeting.participants)) {
@@ -129,8 +129,10 @@ class MeetingService {
             if (meeting.status == 'in-progress' && statusBody.status == 'cancelled') {
                 throw new BadRequestError('Meeting status cannot be updated to cancelled after starting the meeting');
             }
-            const dateTime = moment(`${meeting.date} ${meeting.startTime}`, 'DD/MM/YYYY hh:mm A');
-            if (meeting.status == 'upcoming' && statusBody.status == 'in-progress' && dateTime.isAfter(moment())) {
+            const timeZone = "Asia/Kolkata";
+            const dateTime = moment.tz(`${meeting.date} ${meeting.startTime}`, 'DD/MM/YYYY hh:mm A', timeZone);
+            const now = moment.tz(timeZone);
+            if (meeting.status == 'upcoming' && statusBody.status == 'in-progress' && dateTime.isAfter(now)) {
                 throw new BadRequestError('Meeting date and time should be in past to start the meeting');
             }
 
@@ -232,8 +234,10 @@ class MeetingService {
                     link: meeting.link
                 }
             }
-            const dateTime = moment(`${meeting.date} ${meeting.startTime}`, 'DD/MM/YYYY hh:mm A');
-            if (dateTime.isAfter(moment())) {
+            const timeZone = "Asia/Kolkata";
+            const dateTime = moment.tz(`${meeting.date} ${meeting.startTime}`, 'DD/MM/YYYY hh:mm A', timeZone);
+            const now = moment.tz(timeZone);
+            if (dateTime.isAfter(now)) {
                 throw new BadRequestError('Meeting date and time should be in past to join the meeting');
             }
             await this.meetingRepository.updateMeetingStatus(meetingId, 'in-progress');

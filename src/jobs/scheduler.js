@@ -1,7 +1,7 @@
 const core = require('node-cron');
 const MeetingRepository = require('../repositories/meetingRepository');
 const serverConfig = require('../configs/serverConfig');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const statusEmail = require('../utils/emails/statusEmail');
 const meetingRepository = new MeetingRepository();
 
@@ -11,8 +11,10 @@ const scheduler = () => {
             const meetings = await meetingRepository.getMeetingByStatus('upcoming');
 
             for (const meeting of meetings) {
-                const endTimeCheck = moment(`${meeting.date} ${meeting.endTime}`, 'DD/MM/YYYY hh:mm A');
-                if (endTimeCheck.isBefore(moment())) {
+                const timeZone = 'Asia/Kolkata';
+                const endTimeCheck = moment.tz(`${meeting.date} ${meeting.endTime}`, 'DD/MM/YYYY hh:mm A', timeZone);
+                const now = moment.tz(timeZone);
+                if (endTimeCheck.isBefore(now)) {
                     const updatedMeeting = await meetingRepository.updateMeetingStatus(meeting._id, 'cancelled');
                     statusEmail.cancelEmail(updatedMeeting);
                 }
