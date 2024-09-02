@@ -90,7 +90,6 @@ class UserService {
         name: user.name,
         phone: user.phone,
         email: user.email,
-        image: user.image,
       });
       if (!updatedUser) {
         throw new NotFoundError("User");
