@@ -40,7 +40,7 @@ const verifyOtp = async (req, res) => {
         const response = await otpService.verifyOtp(email, otp);
         res.cookie('otpToken', response.token, {
             httpOnly: serverConfig.HTTP_ONLY_COOKIE === 'true',
-            secure: serverConfig.COOKIE_SECURE === 'true',
+            secure: serverConfig.SECURE_COOKIE === 'true',
             expires: new Date(Date.now() + parseInt(serverConfig.OTP_EXPIRES_IN) * 60 * 1000), //minutes to milliseconds,
             sameSite: serverConfig.SAME_SITE_COOKIE,
         }).status(200).json({
