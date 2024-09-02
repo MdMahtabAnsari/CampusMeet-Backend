@@ -9,6 +9,7 @@ const AppError = require("../utils/errors/appError");
 const validateSocketConnection = (socket, next) => {
   try {
     const token = socket.handshake.headers.cookie.split("=")[1];
+    console.log(token);
     if (!token) {
       throw new UnauthorizedError();
     }
