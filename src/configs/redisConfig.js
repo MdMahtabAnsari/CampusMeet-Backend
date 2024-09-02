@@ -5,7 +5,9 @@ const redis = new Redis({
   host: serverConfig.REDIS_HOST,
   port: serverConfig.REDIS_PORT,
   password: serverConfig.REDIS_PASSWORD,
-  tls:{}
+  tls:{
+    rejectUnauthorized: false
+  }
 });
 redis.on("error", (err) => {
   console.error("Redis connection error:", err);

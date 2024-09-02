@@ -6,7 +6,9 @@ const redisConfig = {
   host: serverConfig.REDIS_HOST,
   port: serverConfig.REDIS_PORT,
   password: serverConfig.REDIS_PASSWORD,
-  tls: {},
+  tls: {
+    rejectUnauthorized: false,
+  },
 };
 const statusQueue = new Queue("status", { redis: redisConfig });
 
