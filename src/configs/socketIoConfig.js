@@ -11,14 +11,16 @@ let io;
 function socketInit(server) {
   try {
     io = new Server(server, {
-      cors: corsConfig,
+      cors: {
+        origin: corsConfig.origin,
+        credentials: corsConfig.credentials,
+        methods: corsConfig.methods.split(","),
+      },
     });
     io.use(validateSocketConnection);
     io.on("connection", (socket) => {
       console.log("A user connected");
       socketService.handleSokcet(socket);
-
-      
     });
   } catch (error) {
     if (error instanceof AppError) {
