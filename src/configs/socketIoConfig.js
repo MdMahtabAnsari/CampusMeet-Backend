@@ -14,6 +14,7 @@ function socketInit(server) {
       origin: corsConfig.origin,
       credentials: corsConfig.credentials,
       methods: corsConfig.methods.split(","),
+      allowedHeaders: corsConfig.allowedHeaders.split(","),
     };
     io = new Server(server, {
       cors: cors,
