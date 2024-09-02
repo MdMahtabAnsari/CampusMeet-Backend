@@ -10,9 +10,9 @@ const signIn = async (req, res) => {
         const response = await authService.signIn(email, password);
         res.cookie('authToken', response.token, {
             httpOnly: serverConfig.HTTP_ONLY_COOKIE === 'true',
-            secure: serverConfig.COOKIE_SECURE === 'true',
+            secure: serverConfig.SECURE_COOKIE === 'true',
             expires: new Date(Date.now() + parseInt(serverConfig.COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000), //days to milliseconds,
-            sameSite: serverConfig.SAME_SITE_COOKIE,
+            // sameSite: serverConfig.SAME_SITE_COOKIE,
             domain: serverConfig.CORS_ORIGIN,
             path: '/'
 

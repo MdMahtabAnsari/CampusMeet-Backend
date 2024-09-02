@@ -8,7 +8,7 @@ const serverConfig = {
     JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,
     BCRYPT_SALT: process.env.BCRYPT_SALT,
     COOKIE_EXPIRES_IN: process.env.COOKIE_EXPIRES_IN,
-    COOKIE_SECURE: process.env.COOKIE_SECURE,
+    SECURE_COOKIE: process.env.SECURE_COOKIE,
     HTTP_ONLY_COOKIE: process.env.HTTP_ONLY_COOKIE,
     DEFAULT_AVATAR: process.env.DEFAULT_AVATAR,
     CLOUD_NAME: process.env.CLOUD_NAME,

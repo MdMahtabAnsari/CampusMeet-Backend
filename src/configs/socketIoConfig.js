@@ -10,13 +10,16 @@ const AppError = require("../utils/errors/appError");
 let io;
 function socketInit(server) {
   try {
+    const cors = {
+      origin: corsConfig.origin,
+      credentials: corsConfig.credentials,
+      methods: corsConfig.methods.split(","),
+    };
     io = new Server(server, {
-      cors: {
-        origin: corsConfig.origin,
-        credentials: corsConfig.credentials,
-        methods: corsConfig.methods.split(","),
-      },
+      cors: cors,
     });
+    console.log("Socket.io initialized");
+    console.log("Socket.io cors options: ", cors);
     io.use(validateSocketConnection);
     io.on("connection", (socket) => {
       console.log("A user connected");
