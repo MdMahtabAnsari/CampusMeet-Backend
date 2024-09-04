@@ -38,7 +38,7 @@ class FriendService {
             if (!isFriend) {
                 throw new NotFoundError('Friend');
             }
-            const friend = await this.friendRepository.removeFriend(userId, friendId);
+            await this.friendRepository.removeFriend(userId, friendId);
             await this.friendRepository.removeFriend(friendId, userId);
             const userDetail = await this.userRepository.getUserById(userId);
             const friendDetail = await this.userRepository.getUserById(friendId);

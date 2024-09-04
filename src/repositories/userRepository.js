@@ -105,16 +105,6 @@ class UserRepository {
         }
     }
 
-    async getAllUsers(){
-        try{
-            return await User.find();
-        }
-        catch(error){
-            console.log(error);
-            throw new InternalServerError();
-        }
-    }
-
 
 }
 
